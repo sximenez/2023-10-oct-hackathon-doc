@@ -40,11 +40,13 @@ end
 subgraph Phase 2. Conception - 11h max
 
 subgraph 1[Front]
-Composants
+direction LR
+Composants --- Pages
 end
 
 subgraph 2[Back]
-Entités
+direction LR
+Entités --- Routes
 end
 
 end
