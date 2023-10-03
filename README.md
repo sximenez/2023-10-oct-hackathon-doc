@@ -10,13 +10,7 @@ _L'important, c'est la formation de la pensée, pas l'exercice formel en tant qu
   - [Phase 1. Cahier des charges](#phase-1-cahier-des-charges)
     - [Méthode QQCOQP](#méthode-qqcoqp)
   - [Phase 2. Conception](#phase-2-conception)
-    - [Front : Composants](#front--composants)
-    - [Back : Entités](#back--entités)
   - [Phase 3. Développement](#phase-3-développement)
-    - [Front : Vues](#front--vues)
-    - [Back : Persistence](#back--persistence)
-    - [Back : API](#back--api)
-    - [Front : Logique](#front--logique)
   - [MVP](#mvp)
   - [Conclusion](#conclusion)
 
@@ -34,7 +28,12 @@ end
 Environnement --> Problématique
 
 subgraph Phase 1. Cahier des charges - 10h max
-Problématique --> Sujet --> Fonctionnalités
+
+subgraph 9h30 max
+Problématique --> Sujet
+end
+
+Sujet --> Fonctionnalités
 end
 
 subgraph Phase 2. Conception - 11h max
@@ -63,17 +62,21 @@ direction LR
 Persistence --> API
 end
 
-Débug --> V0
+subgraph 16h30
+Tests/Débug/Refacto
+end
+
+Tests/Débug/Refacto --> MVP
 
 end
 
-subgraph Phase 4. Bouclage - 10h max
+subgraph Phase 4. Bouclage - 12h max
 direction LR
-V0 --> Refacto --> Test --> MVP
+MVP --> 5[Test final] --> Pitch
 end
 
-Fonctionnalités --> 1[Front] --> 3[Front] --> Débug
-Fonctionnalités --> 2[Back] --> 4[Back] --> Débug
+Fonctionnalités --> 1[Front] --> 3[Front] --> Tests/Débug/Refacto
+Fonctionnalités --> 2[Back] --> 4[Back] --> Tests/Débug/Refacto
 
 style 3 stroke:lightgreen
 style 4 stroke:orange
@@ -156,19 +159,65 @@ end
 
 ## Phase 2. Conception
 
-### Front : Composants
+```mermaid
+graph LR
 
-### Back : Entités
+subgraph Front
+direction LR
+
+subgraph Composants
+A
+B
+C
+end
+
+subgraph Pages
+1
+2
+3
+end
+
+end
+
+subgraph Back
+direction LR
+
+subgraph Entités
+D
+E
+F
+end
+
+subgraph Routes
+4
+5
+6
+end
+
+end
+
+Front --- Back
+
+```
 
 ## Phase 3. Développement
 
-### Front : Vues
+```mermaid
+graph LR
 
-### Back : Persistence
+User --- 1[Vues] 
 
-### Back : API
+subgraph Front
+1[Vues] --- 2[Logique]
+end
 
-### Front : Logique
+subgraph Back
+4{{API}} --- 3[(Persistence)]
+end
+
+2[Logique] --- 4{{API}}
+
+```
 
 ## MVP
 
