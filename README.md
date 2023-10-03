@@ -1,136 +1,192 @@
+# Titre de l'app
+
 _L'important, c'est la formation de la pensée, pas l'exercice formel en tant que tel (Pierre Cassou-Noguès)._
+
+- [Titre de l'app](#titre-de-lapp)
+  - [Plan](#plan)
+  - [Phase 0. Préparation](#phase-0-préparation)
+    - [Rôles](#rôles)
+    - [Environnement](#environnement)
+  - [Phase 1. Cahier des charges](#phase-1-cahier-des-charges)
+    - [Méthode QQCOQP](#méthode-qqcoqp)
+  - [Phase 2. Conception](#phase-2-conception)
+    - [Front : Composants](#front--composants)
+    - [Back : Entités](#back--entités)
+  - [Phase 3. Développement](#phase-3-développement)
+    - [Front : Vues](#front--vues)
+    - [Back : Persistence](#back--persistence)
+    - [Back : API](#back--api)
+    - [Front : Logique](#front--logique)
+  - [MVP](#mvp)
+  - [Conclusion](#conclusion)
+
+---
 
 ## Plan
 
 ```mermaid
 graph LR
-subgraph Prévisionnel
-Equipe --> Environnement --> Roadmap
+
+subgraph Phase 0. Préparation
+Rôles --> Environnement
 end
-subgraph Développement
-Roadmap --> CDC --> Conception --> Réalisation --> Front --> Vues --> Logique --> MVP
-Réalisation --> Back --> Persistence --> API --> MVP
+
+Environnement --> Problématique
+
+subgraph Phase 1. Cahier des charges - 10h max
+Problématique --> Sujet --> Fonctionnalités
 end
-MVP --> Démo --> Conclusion
-style Vues stroke:lightgreen
-style Persistence stroke:orange
-style API stroke:orange
-style Logique stroke:lightgreen
+
+subgraph Phase 2. Conception - 11h max
+
+subgraph 1[Front]
+Composants
+end
+
+subgraph 2[Back]
+Entités
+end
+
+end
+
+subgraph Phase 3. Développement - Fin de journée 1
+
+subgraph 3[Front]
+direction LR
+Vues --> Logique
+end
+
+subgraph 4[Back]
+direction LR
+Persistence --> API
+end
+
+Débug --> V0
+
+end
+
+subgraph Phase 4. Bouclage - 10h max
+direction LR
+V0 --> Refacto --> Test --> MVP
+end
+
+Fonctionnalités --> 1[Front] --> 3[Front] --> Débug
+Fonctionnalités --> 2[Back] --> 4[Back] --> Débug
+
+style 3 stroke:lightgreen
+style 4 stroke:orange
+style MVP stroke:yellow
 ```
+---
 
-## Résumé
+## Phase 0. Préparation
 
-- Projet : dans le cadre du Hackathon 2023, développement intensif en équipe de quatre développeurs d'une application web X.
-
-- Front : Next.js
-
-- Back : Symfony - API Platform
-
-- Résultat :
-
-  - Organisation de l'environnement de travail
-
-  - Conception et réalisation de l'application
-
-  - Collaboration en équipe
-
-  - Mise en pratique des connaissances sur un délai de développement très court
-
-### Objectifs
-
-Conformément au cahier des charges (CDC) :
-
-- Lister les attendus du projet
-
-- Lister les contraintes du projet
-
-- Concevoir le projet
-
-- Réaliser si possible une première version du projet
-
-- Présenter les résultats
-
-## Prévisionnel
-
-### Equipe
-
-- Frontend : Young-hee et Alexis
-
-- Backend : Olivier
-
-- Fullstack : Steven
-
-### Environnement de développement
-
-Etant donné le délai très court du projet, nous avons estimé pertinent d'anticiper la mise en place du cadre organisationnel et technique.
-
-- GitHub : mise en place d'une équipe, un tableau Kanban et deux dépôts
+### Rôles
 
 ```mermaid
-graph TD
-Organization --- Kanban
-Kanban --- A[Repo front]
-Kanban --- B[Repo back]
+graph TB
 
+subgraph Full
+
+subgraph Front
+Alexis
+Young-hee
+end
+
+subgraph Back
+Olivier
+end
+
+Steven
+
+end
+
+Front --- Steven --- Back
 ```
 
-- Choix des technologies : nous avons opté pour des technologies offrant des composants prêts à l'emploi, afin de gagner du temps et de nous concentrer sur la satisfaction du besoin (business logic) :
-
-  - Front : React, avec Material UI (MUI), Next.js ?
-
-  - Back : PHP Symfony + API Platform
-
-### Roadmap
-
-Nous avons également anticipé les grandes étapes du projet :
-
-- Une fois la consigne connue, brainstorming et définition du CDC (méthode QQCOQP).
-- 
-```mermaid
-graph TD
-Projet --> A[Quoi ? Objectif<br>Ce projet vise à ...]
-Projet --> B[Quand ? Deadline <br>13 octobre]
-Projet --> C[Qui ? Cible<br>Les utilisateurs sont ...]
-Projet --> D[Comment ?<br>Les fonctionnalités, interfaces ...]
-D --> F[Front]
-F --> G[Charte graphique]
-F --> Thème
-D --> H[Back]
-H --> Entités
-Projet --> E[Pourquoi ?<br>Justifier nos choix ...]
-
-```
-
-- Puis, une phase de conception et de réalisation, découpée en quatre grandes couches de responsabilité.
-
+### Environnement
 
 ```mermaid
 graph LR
-0{{Conception}} --> 1{{Vues}}
-subgraph Développement
-subgraph Equipe front : Young-hee et Alexis
-1{{Vues}} --> 4{{Logique}}
+0[Organization GitHub] --- Kanban
+
+subgraph A[Repo front]
+direction LR
+React --- 1[React Router]
 end
-subgraph Equipe back : Olivier et Steven
-2{{Persistence}} --> 3{{API}}
+
+subgraph B[Repo back]
+direction LR
+Symfony --- 2[API Platform]
 end
-3{{API}} --> 10{{Test}} --> 4{{Logique}}
-end
-0{{Conception}} --> 2{{Persistence}}
-4{{Logique}} --> 5{{Test}} --> 6{{Refacto}} --> 7{{Deploiement}}
-6{{Refacto}} --> 8{{Documentation}}
-style 1 stroke:lightgreen
-style 2 stroke:orange
-style 3 stroke:orange
-style 4 stroke:lightgreen
+
+Kanban --- A[Repo front]
+Kanban --- B[Repo back]
+
+style A stroke:lightgreen
+style B stroke:orange
+
 ```
 
-## Cahier des charges
+## Phase 1. Cahier des charges
 
-## Conception et architecture
+### Méthode QQCOQP
 
-## Réalisation
+```mermaid
+graph LR
 
-## Demo
+subgraph Problématique
+0[Quel est le problème ?]
+end
+
+subgraph Sujet
+1[Comment on résout ce problème ?]
+2[Pourquoi cette solution ?]
+end
+
+subgraph Fonctionnalités
+3[Par quels moyens ?]
+end
+
+0[Quel est le problème ?] --> 1[Comment on résout ce problème ?] --> 2[Pourquoi cette solution ?] --> 3[Par quels moyens ?]
+
+```
+
+## Phase 2. Conception
+
+### Front : Composants
+
+### Back : Entités
+
+## Phase 3. Développement
+
+### Front : Vues
+
+### Back : Persistence
+
+### Back : API
+
+### Front : Logique
+
+## MVP
 
 ## Conclusion
+
+- Projet : 
+
+- Front : React - React Router
+
+- Back : Symfony - API Platform
+
+- Résultats :
+
+| Phase | Description | Compétence
+| -------- | -------- | -------- |
+| Préparation | Répartition des rôles et choix des technos (focus prêt à l'emploi) | Concertation |
+| Préparation | Mise en place de l'environnement de travail | Organisation |
+| Conception | Choix des composants/entités | Travail d'équipe |
+| Réalisation | Push GitHub + tests fonctionnels | Travail d'équipe |
+| Réalisation | Respect des délais | Sens des priorités |
+| Pitch | Bouclage | Esprit de synthèse |
+
+- Difficultés :
