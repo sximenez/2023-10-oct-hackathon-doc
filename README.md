@@ -47,6 +47,11 @@ end
 
 9h15[9h15 max] --> 9h30[9h30 max]
 
+style Essentielles stroke:yellow
+```
+```mermaid
+graph LR
+
 subgraph AA[Phase 2. Cycle conception par feature - 10h max]
 direction LR
 
@@ -80,7 +85,7 @@ API --> Logique
 
 end
 
-B1[Feature 1] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B2[Feature 2] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B3[Feature ...] --> BB[Phase 3. Développement par feature - 18h]
+CDC --> B1[Feature 1] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B2[Feature 2] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B3[Feature ...] --> BB[Phase 3. Développement par feature - 18h]
 B3[Feature ...] --> AA[Phase 2. Cycle conception par feature - 10h max] 
 
 BB[Phase 3. Développement par feature - 18h] --> A2[Feature 2] --> BB[Phase 3. Développement par feature - 18h] --> A3[Feature ...] --> BB[Phase 3. Développement par feature - 18h] 
@@ -92,7 +97,6 @@ direction LR
 5[Test final] --> MVP --> Pitch
 end
 
-style Essentielles stroke:yellow
 style 3 stroke:lightgreen
 style 4 stroke:orange
 ```
