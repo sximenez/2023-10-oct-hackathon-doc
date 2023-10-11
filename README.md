@@ -80,7 +80,7 @@ API --> Logique
 
 end
 
-9h30[9h30 max] --> B1[Feature 1] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B2[Feature 2] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B3[Feature ...] --> BB[Phase 3. Développement par feature - 18h]
+B1[Feature 1] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B2[Feature 2] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B3[Feature ...] --> BB[Phase 3. Développement par feature - 18h]
 B3[Feature ...] --> AA[Phase 2. Cycle conception par feature - 10h max] 
 
 BB[Phase 3. Développement par feature - 18h] --> A2[Feature 2] --> BB[Phase 3. Développement par feature - 18h] --> A3[Feature ...] --> BB[Phase 3. Développement par feature - 18h] 
