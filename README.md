@@ -4,7 +4,6 @@ _L'important, c'est la formation de la pensée, pas l'exercice formel en tant qu
 
 - [Titre de l'app](#titre-de-lapp)
   - [Plan](#plan)
-  - [Réel](#réel)
   - [Phase 0. Préparation](#phase-0-préparation)
     - [Rôles](#rôles)
     - [Environnement](#environnement)
@@ -27,18 +26,29 @@ subgraph Phase 0. Préparation
 Rôles --> Environnement
 end
 
-Environnement -- 8h45 --> Problématique
+Environnement -- 8h45 --> 9h15[9h15 max]
 
-subgraph Phase 1. Cahier des charges - 9h45 max
+subgraph Phase 1. Cahier des charges
 
-subgraph 9h15 max
+subgraph 9h15[9h15 max]
+direction LR
 Problématique --> Sujet
 end
 
-Sujet --> Fonctionnalités
+subgraph 9h30[9h30 max]
+direction TB
+Fonctionnalités --> Essentielles --> A[Feature 1]
+Essentielles --> B[Feature 2]
+Essentielles --> C[Feature 3]
+Fonctionnalités --> Optionnelles
+Optionnelles --> D[Feature 4]
+end
 end
 
-subgraph Phase 2. Conception - 10h30 max
+9h15[9h15 max] --> 9h30[9h30 max]
+
+subgraph AA[Phase 2. Cycle conception par feature - 10h max]
+direction LR
 
 subgraph 1[Front]
 direction LR
@@ -52,107 +62,40 @@ end
 
 end
 
-subgraph Phase 3. Développement - 18h
+subgraph BB[Phase 3. Cycle développement par feature - 18h]
+direction LR
 
 subgraph 3[Front]
-direction LR
 Vues --> Logique
 end
 
 subgraph 4[Back]
-direction LR
 Persistence --> API
 end
+ 
+API --> Logique
 
-subgraph 16h30
-Tests/Débug/Refacto
+3[Front] --> 6[Test OK]
+4[Back] --> 6[Test OK]
+
 end
 
-Tests/Débug/Refacto --> MVP
+9h30[9h30 max] --> B1[Feature 1] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B2[Feature 2] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B3[Feature ...] --> BB[Phase 3. Développement par feature - 18h]
+B3[Feature ...] --> AA[Phase 2. Cycle conception par feature - 10h max] 
 
-end
+BB[Phase 3. Développement par feature - 18h] --> A2[Feature 2] --> BB[Phase 3. Développement par feature - 18h] --> A3[Feature ...] --> BB[Phase 3. Développement par feature - 18h] 
 
-subgraph Phase 4. Bouclage - 12h max
+A3[Feature ...] --> CC[Phase 4. Bouclage - 12h max]
+
+subgraph CC[Phase 4. Bouclage - 12h max]
 direction LR
-MVP --> 5[Test final] --> Pitch
+5[Test final] --> MVP --> Pitch
 end
 
-Fonctionnalités --> 1[Front] --> 3[Front] --> Tests/Débug/Refacto
-Fonctionnalités --> 2[Back] --> 4[Back] --> Tests/Débug/Refacto
-
+style Essentielles stroke:yellow
 style 3 stroke:lightgreen
 style 4 stroke:orange
-style MVP stroke:yellow
 ```
----
-
-## Réel
-
-```mermaid
-graph LR
-
-subgraph Phase 0. Préparation
-Rôles --> Environnement
-end
-
-Environnement -- 8h45 --> Problématique
-
-subgraph Phase 1. Cahier des charges - 9h45 max
-
-subgraph 9h15 max
-Problématique --> Sujet
-end
-
-Sujet --> Fonctionnalités
-end
-
-subgraph Phase 2. Conception - 10h30 max
-
-subgraph 1[Front]
-direction LR
-Composants --- Pages
-end
-
-subgraph 2[Back]
-direction LR
-Entités --- Routes
-end
-
-end
-
-subgraph Phase 3. Développement - 18h
-
-subgraph 3[Front]
-direction LR
-Vues --> Logique
-end
-
-subgraph 4[Back]
-direction LR
-Persistence --> API
-end
-
-subgraph 16h30
-Tests/Débug/Refacto
-end
-
-Tests/Débug/Refacto --> MVP
-
-end
-
-subgraph Phase 4. Bouclage - 12h max
-direction LR
-MVP --> 5[Test final] --> Pitch
-end
-
-Fonctionnalités --> 1[Front] --> 3[Front] --> Tests/Débug/Refacto
-Fonctionnalités --> 2[Back] --> 4[Back] --> Tests/Débug/Refacto
-
-style 3 stroke:lightgreen
-style 4 stroke:orange
-style MVP stroke:yellow
-```
-
 ---
 
 ## Phase 0. Préparation
