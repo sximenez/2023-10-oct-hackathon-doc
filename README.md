@@ -4,7 +4,9 @@ _L'important, c'est la formation de la pensée, pas l'exercice formel en tant qu
 
 - [Adopte ton festival !](#adopte-ton-festival-)
   - [Résumé](#résumé)
-  - [Plan](#plan)
+  - [Cas d'utilisation](#cas-dutilisation)
+  - [Demo](#demo)
+  - [Méthodologie de travail](#méthodologie-de-travail)
   - [Phase 0. Préparation](#phase-0-préparation)
     - [Rôles](#rôles)
     - [Environnement](#environnement)
@@ -16,26 +18,48 @@ _L'important, c'est la formation de la pensée, pas l'exercice formel en tant qu
     - [Base de données](#base-de-données)
     - [Backend](#backend)
     - [Frontend](#frontend)
-  - [DEMO](#demo)
-    - [Sécurisation](#sécurisation)
-  - [MVP](#mvp)
   - [Conclusion](#conclusion)
 
 ---
 
 ## Résumé
 
-- Besoin : Proposer une solution de consultation de données publiques avec possibilité de mise à jour par l'utilisateur. 
+- Besoin : Proposer une solution pour consulter des données publiques avec la possibilité de mise à jour par l'utilisateur. 
 
-- Projet : Création d'un site aggrégant les festivals actifs en France, permettant une recherche facile avec la possibilité de signaler des erreurs pour l'utilisateur.
+- Projet : Création d'un site aggrégant les festivals actifs en France, permettant une recherche facile avec la possibilité de signaler des erreurs.
 
-- Stack : 
+## Cas d'utilisation
 
-  - Front : Next.js
+```mermaid
+graph LR
 
-  - Back : Symfony
+Utilisateur --> https://adopte-ton-festival.vercel.app --> 0[Page d'accueil : liste des festivals]
+0[Page d'accueil : liste des festivals] --> 1[Rechercher un festival]
+0[Page d'accueil : liste des festivals] --> 2[Visualiser des données + carte] 
+0[Page d'accueil : liste des festivals] --> 3[Se connecter]
+0[Page d'accueil : liste des festivals] --> S'enregistrer
+3[Se connecter] --> 4[Recevoir une newsletter]
+3[Se connecter] --> 5[Tagger en favori]
+3[Se connecter] --> 6[Historique des recherches]
+3[Se connecter] --> 7[Modifier son compte]
+3[Se connecter] --> 8[Effacer son compte]
 
-## Plan
+style 1 stroke:lightgreen
+style 2 stroke:lightgreen
+style 3 stroke:lightgreen
+style S'enregistrer stroke:lightgreen
+
+style 4 stroke:orange
+style 5 stroke:orange
+style 6 stroke:orange
+style 7 stroke:orange
+style 8 stroke:orange
+
+```
+
+## Demo
+
+## Méthodologie de travail
 
 ```mermaid
 graph LR
@@ -65,6 +89,13 @@ end
 
 9h15[9h15 max] --> 9h30[9h30 max]
 
+style Essentielles stroke:yellow
+
+```
+
+```mermaid
+graph LR
+
 subgraph AA[Phase 2. Cycle conception par feature - 10h max]
 direction LR
 
@@ -77,10 +108,7 @@ subgraph 2[Back]
 direction LR
 Entités --- Routes
 end
-
 end
-
-9h30[9h30 max] --> AA[Phase 2. Cycle conception par feature - 10h max]
 
 subgraph BB[Phase 3. Cycle développement par feature - 18h]
 direction LR
@@ -90,17 +118,16 @@ Vues --> Logique
 end
 
 subgraph 4[Back]
-Persistence --> API
+API
 end
  
 API --> Logique
 
-3[Front] --> 6[Test fonctionnel OK]
-4[Back] --> 6[Test fonctionnel OK]
+Logique --> 6[Test fonctionnel OK]
 
 end
 
-AA[Phase 2. Cycle conception par feature - 10h max] --> BB[Phase 3. Cycle développement par feature - 18h]
+00[Liste des fonctionnalités] --> AA[Phase 2. Cycle conception par feature - 10h max] --> BB[Phase 3. Cycle développement par feature - 18h]
 
 subgraph CC[Phase 4. Bouclage - 12h max]
 direction LR
@@ -109,7 +136,6 @@ end
 
 BB[Phase 3. Cycle développement par feature - 18h] --> CC[Phase 4. Bouclage - 12h max]
 
-style Essentielles stroke:yellow
 style 5 stroke:yellow
 style 3 stroke:lightgreen
 style 4 stroke:orange
@@ -166,7 +192,6 @@ style B stroke:orange
 
 ```
 
-![repos](repos.png)
 ![kanban](kanban.png)
 
 ```mermaid
@@ -208,12 +233,12 @@ end
 
 | Type | Description | Route |
 | -------- | -------- | -------- |
-| Essentielle | Affichage des cartes page Home | api/festivals GET |
-| Essentielle | Barre de recherche | api/search GET |
+| Essentielle - OK | Affichage des cartes page Home | api/festivals GET |
+| Essentielle - OK | Barre de recherche | api/search GET |
 | Essentielle | Recherche par catégories (select) | api/categories/{id} GET | 
-| Essentielle | Page festival | api/festivals/{id} GET |
-| Essentielle | Log in | api/login_check POST |
-| Essentielle | Register | api/users POST |
+| Essentielle - OK | Page festival | api/festivals/{id} GET |
+| Essentielle - OK | Log in | api/login_check POST |
+| Essentielle - OK | Register | api/users POST |
 | Essentielle | Signaler une arreur | api/festivals/{id} PUT |
 | Optionnelle | Affichage de l'historique des recherches |  |
 | Optionnelle | Affichage de cartes selon géolocalisation IP |  |
@@ -285,11 +310,10 @@ Front --- Back
 
 - Consommation API et visualisation des données
 - Interface responsive
-- Ajout d'un user
+- Ajout d'un user (axe d'amélioration : password hashing)
 - Authentification
 
-DEMO
----
+<!--
 
 ![Architecture](architecture.png)
 
@@ -322,9 +346,15 @@ Front : sécurisation des formulaires avec DOM purify ?
 
 Back : utilisation de `htmlspecialchars` + JWT pour protéger les routes
 
-## MVP
+## MVP -->
 
 ## Conclusion
+
+- Stack : 
+
+  - Front : Next.js
+
+  - Back : Symfony
 
 - Résultats :
 
@@ -344,6 +374,6 @@ Back : utilisation de `htmlspecialchars` + JWT pour protéger les routes
 | Préparation | Mise en place de Docker avec MySql et non postgresql | Config |
 | Préparation | postgresql | Autoformation |
 | Réalisation | Plan | Cycle de développement par feature exigeant dans les délais --> tendance à avancer sur toutes les features pour respecter les délais |
-| Réalisation | Next.js | Moins bien adapté pour une petite appli |
-| Réalisation | Symfony | Prioriser API Platform pour respecter les délais |
 | Réalisation | Mentors | Profiter davantage de leurs avis |
+<!-- | Réalisation | Next.js | Moins bien adapté pour une petite appli |
+| Réalisation | Symfony | Prioriser API Platform pour respecter les délais | -->
