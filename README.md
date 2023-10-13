@@ -1,21 +1,39 @@
-# Titre de l'app
+# Adopte ton festival !
 
 _L'important, c'est la formation de la pensée, pas l'exercice formel en tant que tel (Pierre Cassou-Noguès)._
 
-- [Titre de l'app](#titre-de-lapp)
+- [Adopte ton festival !](#adopte-ton-festival-)
+  - [Résumé](#résumé)
   - [Plan](#plan)
   - [Phase 0. Préparation](#phase-0-préparation)
     - [Rôles](#rôles)
     - [Environnement](#environnement)
   - [Phase 1. Cahier des charges](#phase-1-cahier-des-charges)
     - [Méthode QQCOQP](#méthode-qqcoqp)
+    - [Backlog de l'application](#backlog-de-lapplication)
   - [Phase 2. Conception](#phase-2-conception)
   - [Phase 3. Développement](#phase-3-développement)
+    - [Base de données](#base-de-données)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [DEMO](#demo)
     - [Sécurisation](#sécurisation)
   - [MVP](#mvp)
   - [Conclusion](#conclusion)
 
 ---
+
+## Résumé
+
+- Besoin : Proposer une solution de consultation de données publiques avec possibilité de mise à jour par l'utilisateur. 
+
+- Projet : Création d'un site aggrégant les festivals actifs en France, permettant une recherche facile avec la possibilité de signaler des erreurs pour l'utilisateur.
+
+- Stack : 
+
+  - Front : Next.js
+
+  - Back : Symfony
 
 ## Plan
 
@@ -47,11 +65,6 @@ end
 
 9h15[9h15 max] --> 9h30[9h30 max]
 
-style Essentielles stroke:yellow
-```
-```mermaid
-graph LR
-
 subgraph AA[Phase 2. Cycle conception par feature - 10h max]
 direction LR
 
@@ -67,6 +80,8 @@ end
 
 end
 
+9h30[9h30 max] --> AA[Phase 2. Cycle conception par feature - 10h max]
+
 subgraph BB[Phase 3. Cycle développement par feature - 18h]
 direction LR
 
@@ -80,23 +95,22 @@ end
  
 API --> Logique
 
-3[Front] --> 6[Test OK]
-4[Back] --> 6[Test OK]
+3[Front] --> 6[Test fonctionnel OK]
+4[Back] --> 6[Test fonctionnel OK]
 
 end
 
-CDC --> B1[Feature 1] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B2[Feature 2] --> AA[Phase 2. Cycle conception par feature - 10h max] --> B3[Feature ...] --> BB[Phase 3. Développement par feature - 18h]
-B3[Feature ...] --> AA[Phase 2. Cycle conception par feature - 10h max] 
-
-BB[Phase 3. Développement par feature - 18h] --> A2[Feature 2] --> BB[Phase 3. Développement par feature - 18h] --> A3[Feature ...] --> BB[Phase 3. Développement par feature - 18h] 
-
-A3[Feature ...] --> CC[Phase 4. Bouclage - 12h max]
+AA[Phase 2. Cycle conception par feature - 10h max] --> BB[Phase 3. Cycle développement par feature - 18h]
 
 subgraph CC[Phase 4. Bouclage - 12h max]
 direction LR
-5[Test final] --> MVP --> Pitch
+5[Test final / MVP] --> Pitch
 end
 
+BB[Phase 3. Cycle développement par feature - 18h] --> CC[Phase 4. Bouclage - 12h max]
+
+style Essentielles stroke:yellow
+style 5 stroke:yellow
 style 3 stroke:lightgreen
 style 4 stroke:orange
 ```
@@ -152,6 +166,9 @@ style B stroke:orange
 
 ```
 
+![repos](repos.png)
+![kanban](kanban.png)
+
 ```mermaid
 graph LR
 subgraph branches
@@ -187,9 +204,23 @@ end
 
 ```
 
+### Backlog de l'application
+
+| Type | Description | Route |
+| -------- | -------- | -------- |
+| Essentielle | Affichage des cartes page Home | api/festivals GET |
+| Essentielle | Barre de recherche | api/search GET |
+| Essentielle | Recherche par catégories (select) | api/categories/{id} GET | 
+| Essentielle | Page festival | api/festivals/{id} GET |
+| Essentielle | Log in | api/login_check POST |
+| Essentielle | Register | api/users POST |
+| Essentielle | Signaler une arreur | api/festivals/{id} PUT |
+| Optionnelle | Affichage de l'historique des recherches |  |
+| Optionnelle | Affichage de cartes selon géolocalisation IP |  |
+
 ## Phase 2. Conception
 
-```mermaid
+<!-- ```mermaid
 graph LR
 
 subgraph Front
@@ -228,9 +259,37 @@ end
 
 Front --- Back
 
-```
+``` -->
+
+- Maquettage sur papier
+
+- Routes sur papier
 
 ## Phase 3. Développement
+
+### Base de données
+
+- API Festivals en France
+- BDD relationnelle mySQL
+- Insertion table via CSV
+
+![BDD](bdd.png)
+
+### Backend
+
+- API REST avec route JWT
+
+![API](api_routes.png)
+
+### Frontend
+
+- Consommation API et visualisation des données
+- Interface responsive
+- Ajout d'un user
+- Authentification
+
+DEMO
+---
 
 ![Architecture](architecture.png)
 
@@ -267,12 +326,6 @@ Back : utilisation de `htmlspecialchars` + JWT pour protéger les routes
 
 ## Conclusion
 
-- Projet : 
-
-- Front : Next.js
-
-- Back : Symfony
-
 - Résultats :
 
 | Phase | Description | Compétence
@@ -281,7 +334,7 @@ Back : utilisation de `htmlspecialchars` + JWT pour protéger les routes
 | Préparation | Mise en place de l'environnement de travail | Organisation |
 | Conception | Choix des composants/entités | Travail d'équipe |
 | Réalisation | Push GitHub + tests fonctionnels | Travail d'équipe |
-| Réalisation | Respect des délais | Sens des priorités |
+| Réalisation | Features essentielles / optionnelles | Sens des priorités |
 | Pitch | Bouclage | Esprit de synthèse |
 
 - Difficultés :
@@ -290,3 +343,7 @@ Back : utilisation de `htmlspecialchars` + JWT pour protéger les routes
 | -------- | -------- | -------- |
 | Préparation | Mise en place de Docker avec MySql et non postgresql | Config |
 | Préparation | postgresql | Autoformation |
+| Réalisation | Plan | Cycle de développement par feature exigeant dans les délais --> tendance à avancer sur toutes les features pour respecter les délais |
+| Réalisation | Next.js | Moins bien adapté pour une petite appli |
+| Réalisation | Symfony | Prioriser API Platform pour respecter les délais |
+| Réalisation | Mentors | Profiter davantage de leurs avis |
