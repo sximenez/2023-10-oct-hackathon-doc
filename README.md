@@ -33,7 +33,7 @@ _L'important, c'est la formation de la pensée, pas l'exercice formel en tant qu
 ```mermaid
 graph LR
 
-Utilisateur --> https://adopte-ton-festival.vercel.app --> 0[Page d'accueil : liste des festivals]
+Utilisateur --> App --> 0[Page d'accueil : liste des festivals]
 0[Page d'accueil : liste des festivals] --> 1[Rechercher un festival]
 0[Page d'accueil : liste des festivals] --> 2[Visualiser des données + carte] 
 0[Page d'accueil : liste des festivals] --> 3[Se connecter]
@@ -43,6 +43,7 @@ Utilisateur --> https://adopte-ton-festival.vercel.app --> 0[Page d'accueil : li
 3[Se connecter] --> 6[Historique des recherches]
 3[Se connecter] --> 7[Modifier son compte]
 3[Se connecter] --> 8[Effacer son compte]
+3[Se connecter] --> 9[Réserver un billet]
 
 style 1 stroke:lightgreen
 style 2 stroke:lightgreen
